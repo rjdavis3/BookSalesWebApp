@@ -12,11 +12,11 @@ namespace BookSalesWebApp.Migrations
                 name: "books",
                 columns: table => new
                 {
-                    ISBN = table.Column<int>(type: "VARCHAR(13)", maxLength: 13, nullable: false),
-                    Author = table.Column<string>(nullable: true),
+                    ISBN = table.Column<string>(type: "VARCHAR(13)", maxLength: 13, nullable: false),
+                    Author = table.Column<string>(type: "NVARCHAR(1000)", maxLength: 1000, nullable: true),
                     ListPrice = table.Column<decimal>(nullable: false),
                     ReleaseDate = table.Column<DateTime>(nullable: false),
-                    Title = table.Column<string>(nullable: true)
+                    Title = table.Column<string>(type: "NVARCHAR(1000)", maxLength: 1000, nullable: true)
                 },
                 constraints: table =>
                 {

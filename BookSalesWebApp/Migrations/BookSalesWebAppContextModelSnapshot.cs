@@ -22,17 +22,21 @@ namespace BookSalesWebApp.Migrations
 
             modelBuilder.Entity("BookSalesWebApp.Models.Book", b =>
                 {
-                    b.Property<int>("ISBN")
+                    b.Property<string>("ISBN")
                         .HasColumnType("VARCHAR(13)")
                         .HasMaxLength(13);
 
-                    b.Property<string>("Author");
+                    b.Property<string>("Author")
+                        .HasColumnType("NVARCHAR(1000)")
+                        .HasMaxLength(1000);
 
                     b.Property<decimal>("ListPrice");
 
                     b.Property<DateTime>("ReleaseDate");
 
-                    b.Property<string>("Title");
+                    b.Property<string>("Title")
+                        .HasColumnType("NVARCHAR(1000)")
+                        .HasMaxLength(1000);
 
                     b.HasKey("ISBN");
 
