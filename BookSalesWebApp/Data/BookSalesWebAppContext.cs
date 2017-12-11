@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using BookSalesWebApp.Models;
 
 namespace BookSalesWebApp.Models
 {
@@ -14,5 +15,7 @@ namespace BookSalesWebApp.Models
         }
 
         public DbSet<BookSalesWebApp.Models.Book> Book { get; set; }
+
+        public DbSet<BookSalesWebApp.Models.Customer> Customer { get; set; }
     }
 }

@@ -13,11 +13,11 @@ namespace BookSalesWebApp.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string ISBN { get; set;}
         [Column(TypeName = "NVARCHAR(1000)")]
-        [StringLength(1000, MinimumLength = 1, ErrorMessage = "Valid Title is required. Maximum length is 1000 characters.")]
+        [StringLength(1000, MinimumLength = 1, ErrorMessage = "Maximum length of {0} is 1000 characters.")]
         [Required]
         public string Title { get; set; }
         [Column(TypeName = "NVARCHAR(1000)")]
-        [StringLength(1000, MinimumLength = 1, ErrorMessage = "Valid Author is required. Maximum length is 1000 characters.")]
+        [StringLength(1000, MinimumLength = 1, ErrorMessage = "Maximum length of {0} is 1000 characters.")]
         [Required]
         public string Author { get; set; }
         [Display(Name = "List Price")]
