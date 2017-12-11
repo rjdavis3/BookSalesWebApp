@@ -25,7 +25,7 @@ namespace BookSalesWebApp.Controllers
         }
 
         // GET: Books/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(string id)
         {
             if (id == null)
             {
@@ -33,7 +33,7 @@ namespace BookSalesWebApp.Controllers
             }
 
             var book = await _context.Book
-                .SingleOrDefaultAsync(m => m.isbn == id);
+                .SingleOrDefaultAsync(m => m.ISBN == id);
             if (book == null)
             {
                 return NotFound();
@@ -53,7 +53,7 @@ namespace BookSalesWebApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("isbn,title,author,listPrice,releaseDate")] Book book)
+        public async Task<IActionResult> Create([Bind("ISBN,Title,Author,ListPrice,ReleaseDate")] Book book)
         {
             if (ModelState.IsValid)
             {
@@ -65,14 +65,14 @@ namespace BookSalesWebApp.Controllers
         }
 
         // GET: Books/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var book = await _context.Book.SingleOrDefaultAsync(m => m.isbn == id);
+            var book = await _context.Book.SingleOrDefaultAsync(m => m.ISBN == id);
             if (book == null)
             {
                 return NotFound();
@@ -85,9 +85,9 @@ namespace BookSalesWebApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("isbn,title,author,listPrice,releaseDate")] Book book)
+        public async Task<IActionResult> Edit(string id, [Bind("ISBN,Title,Author,ListPrice,ReleaseDate")] Book book)
         {
-            if (id != book.isbn)
+            if (id != book.ISBN)
             {
                 return NotFound();
             }
@@ -101,7 +101,7 @@ namespace BookSalesWebApp.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!BookExists(book.isbn))
+                    if (!BookExists(book.ISBN))
                     {
                         return NotFound();
                     }
@@ -116,7 +116,7 @@ namespace BookSalesWebApp.Controllers
         }
 
         // GET: Books/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
             {
@@ -124,7 +124,7 @@ namespace BookSalesWebApp.Controllers
             }
 
             var book = await _context.Book
-                .SingleOrDefaultAsync(m => m.isbn == id);
+                .SingleOrDefaultAsync(m => m.ISBN == id);
             if (book == null)
             {
                 return NotFound();
@@ -135,19 +135,18 @@ namespace BookSalesWebApp.Controllers
 
         // POST: Books/Delete/5
         [HttpPost, ActionName("Delete")]
-
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var book = await _context.Book.SingleOrDefaultAsync(m => m.isbn == id);
+            var book = await _context.Book.SingleOrDefaultAsync(m => m.ISBN == id);
             _context.Book.Remove(book);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool BookExists(int id)
+        private bool BookExists(string id)
         {
-            return _context.Book.Any(e => e.isbn == id);
+            return _context.Book.Any(e => e.ISBN == id);
         }
     }
 }

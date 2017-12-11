@@ -1,5 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BookSalesWebApp.Models
 {
@@ -7,11 +8,18 @@ namespace BookSalesWebApp.Models
     public class Book
     {
         [Key]
-        public int isbn { get; set;}
-        public string title { get; set; }
-        public string author { get; set; }
-        public decimal listPrice { get; set; }
-        public string releaseDate { get; set; }
+        [Column(TypeName = "VARCHAR(13)")]
+        [StringLength(13)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public String ISBN { get; set;}
+        public string Title { get; set; }
+        public string Author { get; set; }
+        [Display(Name = "List Price")]
+        [DataType(DataType.Currency)]
+        public decimal ListPrice { get; set; }
+        [Display(Name = "Release Date")]
+        [DataType(DataType.Date)]
+        public DateTime ReleaseDate { get; set; }
 
     }
 }

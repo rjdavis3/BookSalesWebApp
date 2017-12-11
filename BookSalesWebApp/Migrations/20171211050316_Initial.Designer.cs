@@ -11,7 +11,7 @@ using System;
 namespace BookSalesWebApp.Migrations
 {
     [DbContext(typeof(BookSalesWebAppContext))]
-    [Migration("20171210231349_Initial")]
+    [Migration("20171211050316_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,18 +23,19 @@ namespace BookSalesWebApp.Migrations
 
             modelBuilder.Entity("BookSalesWebApp.Models.Book", b =>
                 {
-                    b.Property<int>("isbn")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("ISBN")
+                        .HasColumnType("VARCHAR(13)")
+                        .HasMaxLength(13);
 
-                    b.Property<string>("author");
+                    b.Property<string>("Author");
 
-                    b.Property<decimal>("listPrice");
+                    b.Property<decimal>("ListPrice");
 
-                    b.Property<string>("releaseDate");
+                    b.Property<DateTime>("ReleaseDate");
 
-                    b.Property<string>("title");
+                    b.Property<string>("Title");
 
-                    b.HasKey("isbn");
+                    b.HasKey("ISBN");
 
                     b.ToTable("books");
                 });

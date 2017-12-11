@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 using System.Collections.Generic;
 
@@ -13,16 +12,15 @@ namespace BookSalesWebApp.Migrations
                 name: "books",
                 columns: table => new
                 {
-                    isbn = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    author = table.Column<string>(nullable: true),
-                    listPrice = table.Column<decimal>(nullable: false),
-                    releaseDate = table.Column<string>(nullable: true),
-                    title = table.Column<string>(nullable: true)
+                    ISBN = table.Column<int>(type: "VARCHAR(13)", maxLength: 13, nullable: false),
+                    Author = table.Column<string>(nullable: true),
+                    ListPrice = table.Column<decimal>(nullable: false),
+                    ReleaseDate = table.Column<DateTime>(nullable: false),
+                    Title = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_books", x => x.isbn);
+                    table.PrimaryKey("PK_books", x => x.ISBN);
                 });
         }
 
