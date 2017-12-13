@@ -19,5 +19,13 @@ namespace BookSalesWebApp.Models
 
         public virtual ICollection<BookSaleItem> BookSaleItems { get; set; }
 
+        [Display(Name = "Total Price")]
+        public decimal TotalPrice
+        {
+            get
+            {
+                return 9.99M;
+            }
+        }
     }
 }

@@ -54,5 +54,14 @@ namespace BookSalesWebApp.Models
         [Display(Name = "Postal Code")]
         [Required]
         public string PostalCode { get; set; }
+
+        [Display(Name = "Full Name")]
+        public string FullName
+        {
+            get
+            {
+                return LastName + ", " + FirstName;
+            }
+        }
     }
 }
