@@ -11,9 +11,10 @@ using System;
 namespace BookSalesWebApp.Migrations
 {
     [DbContext(typeof(BookSalesWebAppContext))]
-    partial class BookSalesWebAppContextModelSnapshot : ModelSnapshot
+    [Migration("20171213042623_BookSaleISBN")]
+    partial class BookSaleISBN
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,11 +51,13 @@ namespace BookSalesWebApp.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("CustomerFK");
+
                     b.Property<int>("CustomerID");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("CustomerID");
+                    b.HasIndex("CustomerFK");
 
                     b.ToTable("book_sales");
                 });
@@ -64,10 +67,11 @@ namespace BookSalesWebApp.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("BookSaleID");
+                    b.Property<string>("BookFK");
 
-                    b.Property<string>("ISBN")
-                        .HasColumnType("VARCHAR(13)");
+                    b.Property<int?>("BookSaleItemFK");
+
+                    b.Property<string>("ISBN");
 
                     b.Property<long>("Quantity");
 
@@ -75,9 +79,9 @@ namespace BookSalesWebApp.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("BookSaleID");
+                    b.HasIndex("BookFK");
 
-                    b.HasIndex("ISBN");
+                    b.HasIndex("BookSaleItemFK");
 
                     b.ToTable("book_sale_items");
                 });
@@ -135,19 +139,19 @@ namespace BookSalesWebApp.Migrations
                 {
                     b.HasOne("BookSalesWebApp.Models.Customer", "Customer")
                         .WithMany()
-                        .HasForeignKey("CustomerID")
+                        .HasForeignKey("CustomerFK")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("BookSalesWebApp.Models.BookSaleItem", b =>
                 {
-                    b.HasOne("BookSalesWebApp.Models.BookSale")
-                        .WithMany("BookSaleItems")
-                        .HasForeignKey("BookSaleID");
-
                     b.HasOne("BookSalesWebApp.Models.Book", "Book")
                         .WithMany()
-                        .HasForeignKey("ISBN");
+                        .HasForeignKey("BookFK");
+
+                    b.HasOne("BookSalesWebApp.Models.BookSale")
+                        .WithMany("BookSaleItems")
+                        .HasForeignKey("BookSaleItemFK");
                 });
 #pragma warning restore 612, 618
         }

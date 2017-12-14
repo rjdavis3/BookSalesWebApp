@@ -11,9 +11,10 @@ using System;
 namespace BookSalesWebApp.Migrations
 {
     [DbContext(typeof(BookSalesWebAppContext))]
-    partial class BookSalesWebAppContextModelSnapshot : ModelSnapshot
+    [Migration("20171213050629_BookSaleRemoveExtraForeignKeys")]
+    partial class BookSaleRemoveExtraForeignKeys
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
