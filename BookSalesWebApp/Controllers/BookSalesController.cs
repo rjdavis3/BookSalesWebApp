@@ -47,7 +47,7 @@ namespace BookSalesWebApp.Controllers
         // GET: BookSales/Create
         public IActionResult Create()
         {
-            ViewData["CustomerID"] = new SelectList(_context.Customer, "ID", "CustomerID");
+            PopulateCustomersDropDownList();
             return View();
         }
 
@@ -101,6 +101,14 @@ namespace BookSalesWebApp.Controllers
         private bool BookSaleExists(int id)
         {
             return _context.BookSale.Any(e => e.ID == id);
+        }
+
+        private void PopulateCustomersDropDownList(object selectedCustomer = null)
+        {
+            var customersQuery = from d in _context.Customer
+                                   orderby d.LastName
+                                   select d;
+            ViewBag.CustomerID = new SelectList(customersQuery, "ID", "FullName", selectedCustomer);
         }
     }
 }
