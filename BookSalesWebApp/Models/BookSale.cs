@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace BookSalesWebApp.Models
 {
@@ -24,7 +25,7 @@ namespace BookSalesWebApp.Models
         {
             get
             {
-                return 9.99M;
+                return BookSaleItems.Sum(BookSaleItem => BookSaleItem.TotalPrice);
             }
         }
     }

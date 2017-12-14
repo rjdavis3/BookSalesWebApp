@@ -21,7 +21,7 @@ namespace BookSalesWebApp.Controllers
         // GET: BookSales
         public async Task<IActionResult> Index()
         {
-            var bookSalesWebAppContext = _context.BookSale.Include(b => b.Customer);
+            var bookSalesWebAppContext = _context.BookSale.Include(b => b.Customer).Include(b => b.BookSaleItems);
             return View(await bookSalesWebAppContext.ToListAsync());
         }
 
@@ -34,7 +34,7 @@ namespace BookSalesWebApp.Controllers
             }
 
             var bookSale = await _context.BookSale
-                .Include(b => b.Customer)
+                .Include(b => b.Customer).Include(b => b.BookSaleItems)
                 .SingleOrDefaultAsync(m => m.ID == id);
             if (bookSale == null)
             {
