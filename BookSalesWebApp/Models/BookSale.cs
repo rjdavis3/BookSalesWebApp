@@ -25,6 +25,10 @@ namespace BookSalesWebApp.Models
         {
             get
             {
+                if(BookSaleItems == null)
+                {
+                    return 0;
+                }
                 return BookSaleItems.Sum(BookSaleItem => BookSaleItem.TotalPrice);
             }
         }

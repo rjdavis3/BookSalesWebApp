@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BookSalesWebApp.Models;
+using BookSalesWebApp.ViewModels;
 
 namespace BookSalesWebApp.Controllers
 {
@@ -48,6 +49,7 @@ namespace BookSalesWebApp.Controllers
         public IActionResult Create()
         {
             PopulateCustomersDropDownList();
+            PopulateBooks();
             return View();
         }
 
@@ -56,10 +58,21 @@ namespace BookSalesWebApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,CustomerID")] BookSale bookSale)
+        public async Task<IActionResult> Create([Bind("ID,CustomerID")] BookSale bookSale, string[] selectedBooks)
         {
             if (ModelState.IsValid)
             {
+                List<BookSaleItem> bookSaleItems = new List<BookSaleItem>();
+                foreach(var isbn in selectedBooks)
+                {
+                    Book bookToAdd = _context.Book.Find(isbn);
+                    BookSaleItem bookSaleItemToAdd = new BookSaleItem();
+                    bookSaleItemToAdd.TotalPrice = bookToAdd.ListPrice;
+                    bookSaleItemToAdd.ISBN = bookToAdd.ISBN;
+                    bookSaleItemToAdd.Quantity = 1;
+                    bookSaleItems.Add(bookSaleItemToAdd);
+                }
+                bookSale.BookSaleItems = bookSaleItems;
                 _context.Add(bookSale);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -109,6 +122,24 @@ namespace BookSalesWebApp.Controllers
                                    orderby d.LastName
                                    select d;
             ViewBag.CustomerID = new SelectList(customersQuery, "ID", "FullName", selectedCustomer);
+        }
+
+        private void PopulateBooks()
+        {
+            var booksQuery = from d in _context.Book
+                                orderby d.Title
+                                select d;
+            var viewModel = new List<SelectedBookData>();
+            foreach (var book in booksQuery)
+            {
+                viewModel.Add(new SelectedBookData
+                {
+                    ISBN = book.ISBN,
+                    Title = book.Title,
+                    Selected = false
+                });
+            }
+            ViewBag.Books = viewModel;
         }
     }
 }

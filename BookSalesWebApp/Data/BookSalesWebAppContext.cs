@@ -19,5 +19,7 @@ namespace BookSalesWebApp.Models
         public DbSet<BookSalesWebApp.Models.Customer> Customer { get; set; }
 
         public DbSet<BookSalesWebApp.Models.BookSale> BookSale { get; set; }
+
+        public DbSet<BookSalesWebApp.Models.BookSaleItem> BookSaleItem { get; set; }
     }
 }
