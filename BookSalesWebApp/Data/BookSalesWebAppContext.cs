@@ -22,8 +22,13 @@ namespace BookSalesWebApp.Models
         {
             modelBuilder.Entity<BookSale>()
                 .HasMany(b => b.BookSaleItems)
-                .WithOne(c => c.BookSale)
+                .WithOne(b => b.BookSale)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<BookSale>()
+                .HasOne(c => c.Customer)
+                .WithMany(b => b.BookSales)
+                .OnDelete(DeleteBehavior.Restrict);
         }
 
     }

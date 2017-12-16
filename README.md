@@ -29,6 +29,7 @@ Create and Read of Book Sales is supported.
 * Store Total Price on Book Sale instead of calculating it each time.
 * Add ID, Customer Last Name, and ISBN filter.
 * Paginate results from database.
+* Link to Book and Customer from Book Sale Details page.
 
 
 

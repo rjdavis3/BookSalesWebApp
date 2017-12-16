@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BookSalesWebApp.Models
@@ -63,5 +64,7 @@ namespace BookSalesWebApp.Models
                 return LastName + ", " + FirstName;
             }
         }
+
+        public virtual ICollection<BookSale> BookSales { get; set; }
     }
 }
