@@ -65,6 +65,8 @@ namespace BookSalesWebApp.Models
             }
         }
 
+        [Display(Name = "Book Sales")]
         public virtual ICollection<BookSale> BookSales { get; set; }
+
     }
 }

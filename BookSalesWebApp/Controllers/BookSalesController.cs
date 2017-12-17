@@ -106,11 +106,6 @@ namespace BookSalesWebApp.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var bookSale = await _context.BookSale.SingleOrDefaultAsync(m => m.ID == id);
-            if (bookSale.BookSaleItems != null)
-            {
-                _context.BookSaleItem.RemoveRange(bookSale.BookSaleItems);
-                _context.SaveChanges();
-            }
             _context.BookSale.Remove(bookSale);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
