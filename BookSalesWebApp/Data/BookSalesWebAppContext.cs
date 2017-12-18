@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using BookSalesWebApp.Models;
-using System.Data.Entity;
-using System.Data.Entity.ModelConfiguration.Conventions;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace BookSalesWebApp.Models
 {
@@ -24,6 +17,19 @@ namespace BookSalesWebApp.Models
         public DbSet<BookSalesWebApp.Models.BookSale> BookSale { get; set; }
 
         public DbSet<BookSalesWebApp.Models.BookSaleItem> BookSaleItem { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<BookSale>()
+                .HasMany(b => b.BookSaleItems)
+                .WithOne(b => b.BookSale)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<BookSale>()
+                .HasOne(c => c.Customer)
+                .WithMany(b => b.BookSales)
+                .OnDelete(DeleteBehavior.Restrict);
+        }
 
     }
 }
