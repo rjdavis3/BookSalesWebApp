@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -31,6 +32,9 @@ namespace BookSalesWebApp.Models
         [Display(Name = "Release Date")]
         [DataType(DataType.Date)]
         public DateTime ReleaseDate { get; set; }
+
+        [Display(Name = "Books Sold")]
+        public virtual ICollection<BookSaleItem> BookSaleItems { get; set; }
 
     }
 }

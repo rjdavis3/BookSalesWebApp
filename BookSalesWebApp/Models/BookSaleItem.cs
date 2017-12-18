@@ -11,6 +11,9 @@ namespace BookSalesWebApp.Models
         [ForeignKey("BookSaleItemFK")]
         public int ID { get; set; }
 
+        [ForeignKey("BookSaleFK")]
+        public int BookSaleID { get; set; }
+
         [ForeignKey("BookFK")]
         [Column(TypeName = "VARCHAR(13)")]
         public string ISBN { get; set; }
@@ -22,6 +25,8 @@ namespace BookSalesWebApp.Models
         public decimal TotalPrice { get; set; }
 
         public virtual Book Book {get; set;}
+
+        public virtual BookSale BookSale { get; set; }
 
     }
 }

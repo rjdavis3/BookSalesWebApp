@@ -32,7 +32,7 @@ namespace BookSalesWebApp.Controllers
                 return NotFound();
             }
 
-            var customer = await _context.Customer
+            var customer = await _context.Customer.Include(b => b.BookSales)
                 .SingleOrDefaultAsync(m => m.ID == id);
             if (customer == null)
             {
@@ -123,7 +123,7 @@ namespace BookSalesWebApp.Controllers
                 return NotFound();
             }
 
-            var customer = await _context.Customer
+            var customer = await _context.Customer.Include(b => b.BookSales)
                 .SingleOrDefaultAsync(m => m.ID == id);
             if (customer == null)
             {

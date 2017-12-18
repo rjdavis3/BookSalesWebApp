@@ -27,9 +27,9 @@ Create and Read of Book Sales is supported.
 
 ##### Future Improvements:
 * Store Total Price on Book Sale instead of calculating it each time.
-* Fix deletion of Book Sales that have Book Sale Items (need to enable cascade delete)
 * Add ID, Customer Last Name, and ISBN filter.
 * Paginate results from database.
+* Link to Book and Customer from Book Sale Details page.
 
 
 
