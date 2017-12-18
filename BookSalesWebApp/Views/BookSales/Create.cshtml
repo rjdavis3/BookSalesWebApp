@@ -22,28 +22,46 @@
 
             <div class="form-group">
                 <label class="control-label col-med-2" for="selectedBooks">Books</label>
-                <div class="col-md-offset-2 col-md-10">
-                    <table>
+                <table class="table">
+                    <thead>
                         <tr>
-                            @{
-                                List<BookSalesWebApp.ViewModels.SelectedBookData> books = ViewBag.Books;
-                                foreach (var book in books)
-                                {
-                                    @:<tr></tr>
-                                    @:
+                            <th>
+                                Selected
+                            </th>
+                            <th>
+                                ISBN
+                            </th>
+                            <th>
+                                Title
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @{
+                            List<BookSalesWebApp.ViewModels.SelectedBookData> books = ViewBag.Books;
+                            foreach (var book in books)
+                            {
+                                <tr>
                                     <td>
                                         <input type="checkbox"
                                                name="selectedBooks"
                                                value="@book.ISBN"
                                                @(Html.Raw(book.Selected ? "checked=\"checked\"" : "")) />
-                                        @book.ISBN :  @book.Title
                                     </td>
-                                    @:
-                                }
+                                    <td>
+                                        @book.ISBN
+                                    </td>
+                                    <td>
+                                        @book.Title
+                                    </td>
+                                </tr>
                             }
-                        </tr>
-                    </table>
-                </div>
+                        }
+
+                    </tbody>
+                </table>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
