@@ -25,8 +25,14 @@ namespace BookSalesWebApp
         {
             services.AddMvc();
 
-            services.AddDbContext<BookSalesWebAppContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("BookSalesWebAppContext")));
+            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
+            {
+                services.AddDbContext<BookSalesWebAppContext>(options => options.UseInMemoryDatabase("BookSalesWebAppContext"));
+            }
+            else
+            {
+                services.AddDbContext<BookSalesWebAppContext>(options => options.UseSqlServer(Configuration.GetConnectionString("BookSalesWebAppContext")));
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
